@@ -1,0 +1,42 @@
+footer{
+    background-color: #1C2331;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+}
+
+div.footer-copyright{
+    background-color: rgb(21, 26, 37);
+    color:rgb(136, 139, 145);   
+    margin: auto;
+}
+
+h6{
+    color:white;
+}
+
+a{
+    color:white;
+}
+
+p{
+    color:white;
+}
+
+hr{
+    background-color: #673ab7;
+    width: 70px;
+}
+
+.iconredondo{
+	border-radius:100px;
+	width:44px; 
+	height:44px;
+    margin:5px; 
+}
+
+#redsocial img:hover {
+    box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-sizing: border-box;
+}

@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <h1> Punto 1 - Formulario </h1>
+  <form class="form-horizontal" #registroFrom="ngForm">
+  <h2> Información de los asistentes </h2>
+  <!-- /Email -->
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label"> Email </label>
+        <div class="col-sm-8">
+          <input type="text" name="txtUsuario" class="form-control" [(ngModel)]="asistente.usuario" required #txtUsuario="ngModel" placeholder="Ingrese email">
+            <div *ngIf="txtUsuario.invalid && (txtUsuario.dirty || txtUsuario.touched)" class="alert alert-danger">
+              <div *ngIf="txtUsuario.errors.required">
+                El campo email es requerido
+              </div>
+              <div *ngIf="txtUsuario.errors.email">
+                Ingrese un email valido
+              </div>
+            </div>
+        </div>  
+    </div>
+  <!-- /Nombre de la organizacion -->
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label"> Nombre de la organizacion </label>
+        <div class="col-sm-8">
+            <input  type="text" name="txtOrganizacion" [(ngModel)]="asistente.nombreOrganizacion" required minlength="3" pattern="[A-Za-z0-9 ]{1,254}" #txtOrganizacion="ngModel" placeholder="Ingrese nombre de la organizacion">
+        </div>
+        <div *ngIf="txtOrganizacion.invalid && (txtOrganizacion.dirty || txtOrganizacion.touched)" class="alert alert-danger">
+            <div *ngIf="txtOrganizacion.errors.required">
+              El campo organizaci&oacute;n es requerido
+            </div>
+            <div *ngIf="txtOrganizacion.errors.minlength">
+             Se necesitan 3 caracteres m&iacute;nimo
+            </div>
+            <div *ngIf="txtOrganizacion.errors.pattern">
+              Solo se admiten caracteres alfanumericos
+            </div>
+        </div>
+    </div>
+  <!-- /Solicita constancia -->
+    <div class="form-group row">
+      <label for="solicitaConstancia" class="col-sm-3 col-form-label"> Solicita constancia </label>
+        <div class="col-sm-8">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="cbxConstancia" [(ngModel)]="asistente.solicitaConstancia">
+          </div>
+        </div> 
+    </div>
+  <!-- /Registrar y Modificar -->
+    <div class="form-group text-center">
+      <div class="row form-group">
+        <button *ngIf="!btnModificar" type="button" class="btn btn-outline-success col-lg-2 mr-sm-2 my-2" (click)="guardarDatos()" [disabled]="!registroFrom.form.valid">Registrar</button>
+        <button *ngIf="btnModificar" type="button" class="btn btn-outline-success col-lg-2 mr-sm-2 my-2" (click)="modificarDatos()" [disabled]="!registroFrom.form.valid">Modificar</button>
+      </div>
+    </div>
+  </form>
+
+ <!-- /Listado de Asistentes -->
+  <div><h2 class="alert alert-dark col-12 my-0"> Listado de Asistentes </h2>
+    <table class="table mt-10">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Usuario</th>
+          <th>Nombre Organizaci&oacute;n</th>
+          <th>Certificado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let asistente of asistentes; index as i">
+          <td>{{ i+1 }}</td>
+          <td>{{ asistente.usuario }}</td>
+          <td>{{ asistente.nombreOrganizacion | uppercase }}</td>
+          <td *ngIf="asistente.solicitaConstancia"> Si </td>
+          <td *ngIf="!asistente.solicitaConstancia"> No </td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="seleccionarAsistente(asistente)" data-toggle="modal" data-target=".bd-example-modal-sm" >Seleccionar</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="eliminarAsistente(asistente)" data-toggle="modal" data-target=".bd-example-modal-sm">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

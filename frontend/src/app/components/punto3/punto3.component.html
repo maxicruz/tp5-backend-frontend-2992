@@ -1,0 +1,112 @@
+<div class="container-fluid">
+  <h1> Punto 3 - Venta de Pasajes </h1>
+  <form class="form-horizontal" #pasajeFrom="ngForm">
+  <h2>FORMULARIO DE PASAJES</h2>
+  <!-- /DNI del Pasajero -->
+    <div class="form-group row">
+      <label for="dniPasajero" class="col-sm-3 col-form-label"> DNI del Pasajero </label>
+      <div class="col-sm-8">
+        <input type="text" id="dniPasajero" class="form-control" name="txtDni" #dniPasajero="ngModel" placeholder="Ingrese DNI" [(ngModel)]="venta.dniPasajero" required minlength="7" pattern="[0-9]{7,9}" #txtDni="ngModel"/>
+          <div *ngIf="txtDni.invalid && (txtDni.dirty || txtDni.touched)" class="alert alert-danger">
+            <div *ngIf="txtDni.errors.required">
+              El campo DNI es requerido
+            </div>
+            <div *ngIf="txtDni.errors.minlength">
+              Se necesitan 7 caracteres minimo
+            </div>
+            <div *ngIf="txtDni.errors.pattern">
+              Solo se admiten numeros
+          </div>
+        </div>
+      </div>  
+    </div>
+  <!-- /Precio del Pasaje -->
+    <div class="form-group row">
+      <label for="precioPasaje" class="col-sm-3 col-form-label"> Precio del Pasaje </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" id="precioPasaje" name="txtPrecio" [(ngModel)]="venta.precioPasaje" required pattern="(^[1-9][0-9]*.[0-9][0-9]|^[1-9][0-9]*$|^[1-9][0-9]*.[0-9])" #txtPrecio="ngModel" placeholder="Ingrese el precio del pasaje"/>
+        <div *ngIf="txtPrecio.invalid && (txtPrecio.dirty || txtPrecio.touched)" class="alert alert-danger">
+          <div *ngIf="txtPrecio.errors.required">
+            El campo Precio es requerido
+          </div>
+          <div *ngIf="txtPrecio.errors.pattern">
+            Solo se admiten precios mayores a ceros y hasta dos decimales
+          </div>
+        </div>
+      </div>  
+    </div>
+  <!-- /Categoría -->
+    <div class="form-group row">
+      <label for="categoria" class="col-sm-3 col-form-label"> Categor&iacute;a </label>
+      <div class="col-sm-8">
+        <select name="cmbCategoria" id="categoria" class="form-control" [(ngModel)]="venta.categoriaPasajero" (change)="calcularDescuento()" required #cmbCategoria="ngModel">
+          <option value="" selected hidden>Seleccione un opcion...</option>
+          <option value="m">Menor</option>
+          <option value="a">Adulto</option>
+          <option value="j">Jubilado</option>
+        </select>
+        <div *ngIf="cmbCategoria.invalid && (cmbCategoria.dirty || cmbCategoria.touched)" class="alert alert-danger">
+          <div *ngIf="cmbCategoria.errors.required">
+            El campo Categor&iacute;a es requerido
+          </div>
+        </div>
+      </div> 
+    </div>
+  <!-- /Cuadro -->
+    <div id="cuadro" class="text-center" *ngIf="mostrarDescuento">
+      <div><h2> Descuento: $ {{ precioDescuento }} </h2></div>
+      <div><h2> Precio total: {{ precioFinal | currency}} </h2></div>
+    </div>
+  <!-- /Registrar y Limpiar -->
+    <div class="form-group text-center">
+      <button class="btn btn-outline-success col-lg-2 mr-sm-2 my-2" type="submit" value="guardar" (click)="venderPasaje()" [disabled]="!pasajeFrom.form.valid">
+        GUARDAR
+      </button>
+      <button class="btn btn-outline-danger col-lg-2 mr-sm-2 my-2" type="reset" value="limpiar" (click)="limpiarPantalla()">
+        LIMPIAR 
+      </button> 
+    </div>
+  </form> 
+<!-- /Listado de Pasajeros -->
+  <div><h2 class="alert alert-success col-12 my-0"> LISTADO DE PASAJES </h2>
+    <table class="table table-responsive-lg table-dark text-center" [mfData]="pasajes" #mf="mfDataTable" [mfRowsOnPage]="5">
+      <thead>
+        <tr>
+          <th style="width: 20%;">
+            <mfDefaultSorter by="id">#</mfDefaultSorter>
+          </th>
+          <th style="width: 20%">
+            <mfDefaultSorter by="dniPasajero">DNI</mfDefaultSorter>
+          </th>
+          <th style="width: 20%">
+            <mfDefaultSorter by="precioPasaje">Precio</mfDefaultSorter>
+          </th>
+          <th style="width: 20%">
+            <mfDefaultSorter by="categoriaPasajero">Categoria</mfDefaultSorter>
+          </th>
+          <th style="width: 20%">
+            <mfDefaultSorter by="fechaCompra">Fecha</mfDefaultSorter>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pasaje of mf.data; index as i">
+          <td>{{ i+1 }}</td>
+          <td>{{ pasaje.dniPasajero | number:'1.0-2'}}</td>
+          <td>{{ pasaje.precioPasaje | currency}}</td>
+          <td *ngIf="pasaje.categoriaPasajero=='a'"> Adulto </td>
+          <td *ngIf="pasaje.categoriaPasajero=='j'"> Jubilado </td>
+          <td *ngIf="pasaje.categoriaPasajero=='m'"> Menor </td>
+          <td>{{ pasaje.fechaCompra | date:"dd/MM/yyyy" }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td td colspan="5">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

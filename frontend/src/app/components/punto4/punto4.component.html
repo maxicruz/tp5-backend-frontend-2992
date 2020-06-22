@@ -1,0 +1,106 @@
+<div class="container-fluid"> 
+  <h1> Punto 4 - Crucigrama </h1>
+  <form class="form-horizontal">
+    <div *ngIf="!gano && !perdio" class="row">
+      <div *ngIf="fueIniciado" class="card col-12">
+      
+      <!-- VIDAS Y PUNTUACION -->
+      <div class="modal-header alert alert-success text-center mt-1">
+        <div class="mx-auto">
+          <h3> VIDAS: {{vidas}} / 6</h3>
+        </div>
+        <div class="mx-auto">
+          <h3> PUNTAJE: {{puntaje}}</h3>
+        </div>
+      </div>
+      
+      <!-- IMAGEN -->
+      <div class="modal-content">
+        <img src="{{itemSelect.urlimagen}}" alt="item-photo" class="rounded mx-auto d-block imagenzoo" width="500" height="300">
+      </div>
+  
+      <!-- PALABRA EN INGLES -->
+      <div class="card-footer">
+        <div class="col-12 mx-auto">
+          <div class="row">
+            <div *ngFor="let item of letrasParaAdivinar; index as i " class="mx-auto">
+              <input id="{{ i }}" maxlength="1" class="my-inputs text-center text-uppercase" size="3" type="text" (keydown)="keydown(i,$event)" (focus)="verificarPorBotones(i)">
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Teclado de pantalla -->
+      <div class="card-footer">
+        <div class="row">
+          <div class="m-1" *ngFor="let item of letras">
+            <button class="m-1 btn btn-dark btn-block botones text-uppercase" (click)="seleccionarTecla(item)">{{ item }}</button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- PALABRA EN ESPAÑOL -->
+      <div class="card-footer">
+        <div class="card border-success alert-success text-center">
+          <h3>Pista: {{ itemSelect.palabraEspaniol | uppercase}}</h3>
+        </div>
+      </div>
+      
+      <!-- Rendirse -->
+      <div class="card-footer">
+        <button class="btn btn-block btn-danger" (click)="fueIniciado=false">¡Me rindo!</button>
+      </div>
+    </div>
+  
+    <!-- INICIAR JUEGO -->
+    <div *ngIf="!fueIniciado" class="card col-12 mt-1">
+      <div class="modal-header">
+        <div class="mx-auto">
+          <h2> Jugar al crucigrama </h2>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-block btn-primary" (click)="iniciarJuego()">
+          Iniciar Juego
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Ganaste -->
+  <div *ngIf="gano" class="row">
+    <div *ngIf="fueIniciado" class="card col-12 mt-1">
+      <div class="modal-header">
+        <div class="mx-auto">
+          <h2>Felicidades! Ganaste!!! :D</h2>
+        </div>
+      </div>
+      <div class="modal-content">
+        <img src="https://3.bp.blogspot.com/-38a4gptAvpQ/UfkqjvbzhlI/AAAAAAAAt9w/19aK8GF1vJk/s1600/FELICIDADES.gif" alt="item-photo">
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-block btn-success" (click)="iniciarJuego()">Jugar de nuevo</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Perdiste -->
+  <div *ngIf="perdio" class="row">
+    <div *ngIf="fueIniciado" class="card col-12 mt-1">
+      <div class="modal-header">
+        <div class="mx-auto">
+          <h2>Lo siento :( Perdiste!</h2>
+        </div>
+      </div>
+      <div class="modal-content">
+        <img src="https://i.pinimg.com/originals/14/5d/d0/145dd02dbaa43b6ad940451584b07b02.gif" alt="item-photo">
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-block btn-danger" (click)="iniciarJuego()">Intentar de nuevo</button>
+      </div>
+    </div>
+  </div>
+
+  </form>
+</div>

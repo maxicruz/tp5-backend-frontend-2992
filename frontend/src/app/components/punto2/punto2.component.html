@@ -1,0 +1,136 @@
+<div class="container-fluid">
+  <h1> Punto 2 - Mensaje </h1>   
+  <form class="form-horizontal" #mensajeFrom="ngForm">
+  <h2> Envía tu mensaje </h2>
+  <!-- /Para -->
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Para</label>
+        <div class="col-sm-8">
+          <input type="number" class="form-control" type="text" name="txtPara" [(ngModel)]="mensaje.para" required
+              minlength="7" pattern="[0-9]{7,20}" #txtPara="ngModel" placeholder="Ingrese el número">
+            <div *ngIf="txtPara.invalid && (txtPara.dirty || txtPara.touched)" class="alert alert-danger">
+              <div *ngIf="txtPara.errors.required">
+                El campo Para es requerido
+              </div>
+              <div *ngIf="txtPara.errors.minlength">
+                Se necesitan 7 caracteres minimo
+              </div>
+              <div *ngIf="txtPara.errors.pattern">
+                Solo numeros
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Empresa</label>
+      <!-- Carga la lista de la base de datos -->
+      <select name="categoria " class="form-control col-sm-8" [(ngModel)]="mensaje.empresa" required>
+        <option value="{{item._id}}" *ngFor="let item of empresas"> {{item.nombre}} </option>
+      </select>
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Agregar Empresa
+      </button>
+
+      <!-- Modal -->
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Agregar Empresa</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="card-body">
+                <form class="card" #empresaForm="ngForm">
+                  <div class="row form-group">
+                    <label class="col-sm-12 col-md-4">Nombre</label>
+                    <input class="form-control col-sm-12 col-md-8" name="txtNombreEmpresa" [(ngModel)]="empresa.nombre"
+                      required minlength="3" pattern="[A-Za-z ]{1,254}" #txtNombreEmpresa="ngModel" />
+                    <div *ngIf="txtNombreEmpresa.invalid && (txtNombreEmpresa.dirty || txtNombreEmpresa.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="txtNombreEmpresa.errors.required">
+                        El campo Nombre es requerido
+                      </div>
+                      <div *ngIf="txtNombreEmpresa.errors.minlength">
+                        Se necesitan 3 caracteres m&iacute;nimo
+                      </div>
+                      <div *ngIf="txtNombreEmpresa.errors.pattern">
+                        Solo se admiten letras
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <label class="col-sm-12 col-md-4">Email</label>
+                    <input class="form-control col-sm-12 col-md-8" type="text" name="txtEmail"
+                      [(ngModel)]="empresa.email" required email #txtEmail="ngModel" />
+                    <div *ngIf="txtEmail.invalid && (txtEmail.dirty || txtEmail.touched)" class="alert alert-danger">
+                      <div *ngIf="txtEmail.errors.required">
+                        El campo Email es requerido
+                      </div>
+                      <div *ngIf="txtEmail.errors.email">
+                        Ingrese un email v&aacute;lido
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="button" class="btn btn-primary" (click)="agregarEmpresa()" data-dismiss="modal">Agregar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- /De -->
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">De</label>
+        <div class="col-sm-8">
+          <input class="form-control" placeholder="Ingrese su nombre" name="txtDesde" [(ngModel)]="mensaje.desde" required
+              minlength="3" maxlength="20" pattern="[A-Za-z ]{1,254}" #txtDesde="ngModel">
+        </div>
+    </div>
+  <!-- /Mensaje -->
+    <div class="form-group row">
+      <label class="col-12">Mensaje - Tamaño: {{ tamTexto }} | M&aacute;ximo 100 caracteres</label>
+      <textarea class="form-control col-12" [maxlength]="tamMaxTexto" rows="5" name="txtTexto"
+        [(ngModel)]="mensaje.texto" (ngModelChange)="cambiarTamTexto()" required>
+      </textarea>
+    </div>
+
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-outline-dark col-lg-2 mr-sm-2 my-2" (click)="enviarMensaje()"
+          [disabled]="!mensajeFrom.form.valid">Enviar</button>
+      <button type="reset" class="btn btn-outline-dark col-lg-2" (click)="limpiarMensaje()">Limpiar</button> 
+    </div>
+  </form>
+
+  <h2>Informacion de Mensaje</h2>
+  <table class="table mt-10">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Para</th>
+        <th>De</th>
+        <th>Mensaje</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mensaje of mensajes; index as i">
+        <td>{{ i+1 }}</td>
+        <td>{{ mensaje.para }}</td>
+        <td>{{ mensaje.desde }}</td>
+        <td>{{ mensaje.texto }}</td>
+        <td>{{ mensaje.fecha | date:"dd/MM/yyyy" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

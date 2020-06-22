@@ -1,0 +1,50 @@
+h1{
+    text-align: center;
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size:40px;
+}
+
+h2{
+    font-family: verdana;
+    font-style: medium;
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+form{
+    width: 100% ;
+    background: #f0f0f0;
+	box-shadow: rgba(0, 0, 0, 0.3) 10px 10px 10px;
+    border: solid #673ab7 3px;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-weight: bold;
+    padding: 6px;
+    font-size: 18px;
+}
+
+input{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+}
+
+textarea{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+}
+
+button{
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}

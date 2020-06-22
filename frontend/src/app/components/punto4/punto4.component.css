@@ -1,0 +1,80 @@
+h1{
+    text-align: center;
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size:40px;
+}
+
+h2{
+    font-family: verdana;
+    font-style: medium;
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+h3{
+    font-family: verdana;
+    font-style: medium;
+    padding: 10px;
+    font-size: 25px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+form{
+    width: 100%;
+    background: #f0f0f0;
+	box-shadow: rgba(0, 0, 0, 0.3) 10px 10px 10px;
+    border: solid #673ab7 3px;
+    border-radius: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-block-end: 2%;
+}
+
+.imagenzoo{
+    border: solid #000000 5px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.botones{
+    border: solid #000000 1px;
+    border-radius: 12px;
+    font-family: cursive;
+    font-style: unset;
+    font-size: 25px;
+    box-shadow: 0 0 20px rgb(68, 233, 255);
+    text-shadow: 0 0 30px #fff;
+}
+
+button{
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+}
+
+input[type=text]:focus{
+    background-color: #3CBC8D;
+    color: white;
+  }
+
+input{
+    font-family: cursive;
+    font-size: 40px;
+    border: 2px solid #39c;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #39c;
+}
+
+.alert{
+    border: solid #3ab760 2px;
+}
