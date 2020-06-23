@@ -7,7 +7,7 @@ import { Empresa } from 'src/app/models/empresa';
   providedIn: 'root'
 })
 export class EmpresaService {
-  urlBase: string = "http://localhost:3000/api/empresas/";
+  urlBase: string = "http://localhost:3000/api/empresas";
 
   constructor(private _http: HttpClient) { }
 

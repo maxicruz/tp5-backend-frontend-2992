@@ -7,7 +7,7 @@ import { Mensaje } from 'src/app/models/mensaje';
   providedIn: 'root'
 })
 export class MensajeService {
-  urlBase: string = "http://localhost:3000/api/mensajes/";
+  urlBase: string = "http://localhost:3000/api/mensajes";
 
   constructor(private _http: HttpClient) { }
 
