@@ -60,8 +60,8 @@
     <!-- Adelantos -->
     <div class="form-group row">
       <label for="cobrador" class="col-sm-3 col-form-label"> Cobrador </label>
-      <input type="text" class="form-control" id="cobrador" name="txtCobrador" [(ngModel)]="adelanto.cobrador" required minlength="3" pattern="[A-Za-z ]{1,254}" #txtCobrador="ngModel" />
       <div class="col-sm-8">
+      <input type="text" class="form-control" id="cobrador" name="txtCobrador" [(ngModel)]="adelanto.cobrador" required minlength="3" pattern="[A-Za-z ]{1,254}" #txtCobrador="ngModel" />
         <div *ngIf="txtCobrador.invalid && (txtCobrador.dirty || txtCobrador.touched)" class="alert alert-danger">
           <div *ngIf="txtCobrador.errors.required">
             El campo Cobrador es requerido

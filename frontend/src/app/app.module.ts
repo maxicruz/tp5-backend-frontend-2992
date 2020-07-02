@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { NgxDataTableModule} from "angular-9-datatable";
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { FooterComponent } from './components/layout/footer.component';
     FormsModule,
     AppRoutingModule,
     NgxDataTableModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [ AppComponent ]
