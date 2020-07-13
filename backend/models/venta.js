@@ -8,5 +8,5 @@ const VentaSchema = new Schema({
   categoria: { type: String, required: true },
   adelanto: { type: [Adelanto.schema], required: false }
 })
-//   adelanto: { type: Schema.Types.ObjectId, ref: Adelanto, required: true }
+
 module.exports = mongoose.model('Venta', VentaSchema);

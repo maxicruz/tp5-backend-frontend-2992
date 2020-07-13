@@ -22,8 +22,7 @@ export class Punto3Component implements OnInit {
     this.pasaje = new Pasaje();
     this.adelanto = new Adelanto();
     this.pasajes = new Array<Pasaje>();
-    this.adelantos = new Array<Adelanto>();
-    
+    this.adelantos = new Array<Adelanto>();   
     this.listarPasajes();
   }
 
@@ -32,7 +31,6 @@ export class Punto3Component implements OnInit {
     if (this.pasaje.precioPasaje >= this.adelanto.montoAdelanto) {
       this.cargaDatos();
       this.guardarPasaje();
-
       this.pasaje = new Pasaje();
       this.adelanto = new Adelanto();
       this.adelantos = new Array<Adelanto>();
